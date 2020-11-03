@@ -33,7 +33,7 @@ else
 end
 
 % make outpath directory
-out_path=[in_path,'/','ps_UNI_segmentation'];
+out_path=[in_path,'ps_UNI_segmentation/'];
 mkdir(out_path);
 disp(' ');
 disp('++++ Output Directory Created.');
@@ -45,7 +45,7 @@ if exist('in_file','var')==1
     disp('++++ Input File Selected.');
     disp(['> ',in_file]);
 else
-    in_file=uigetfile([pwd,'/','*.nii'],'Select Input File');
+    in_file=uigetfile([pwd,'*.nii'],'Select Input File');
     disp(' ');
     disp('++++ Input File Selected.');
     disp(['> ',in_file]);
@@ -57,19 +57,20 @@ end
 if in_file_ext == ".gz"
     disp(' ');
     disp('++++ Unzipping Input file');
-    gunzip([in_path,'/',in_file]);
-    disp(['> ',in_path,'/',in_file(1:end-3)]);
-    delete([in_path,'/',in_file]);
+    gunzip([in_path,in_file]);
+    disp(['> ',in_path,in_file(1:end-3)]);
+    delete([in_path,in_file]);
+    in_file=in_file(1:end-3);
 end
 
 
 %% Prepare for Bias-correction
-copyfile([in_path,'/',in_file],...
-    [out_path,'/',in_file]);
+copyfile([in_path,in_file],...
+    [out_path,in_file]);
 
 %% Setup SPM Batch
 clear matlabbatch;
-matlabbatch{1}.spm.spatial.preproc.channel.vols = {[out_path,'/',in_file,',1']};
+matlabbatch{1}.spm.spatial.preproc.channel.vols = {[out_path,in_file,',1']};
 matlabbatch{1}.spm.spatial.preproc.channel.biasreg = 0.001;
 matlabbatch{1}.spm.spatial.preproc.channel.biasfwhm = 30;
 matlabbatch{1}.spm.spatial.preproc.channel.write = [1 1];
@@ -115,30 +116,30 @@ spm_jobman('run', matlabbatch);
 
 %% Rename output file
 % Bias corrected file
-copyfile([out_path,'/m',in_file],[out_path,'/',in_file(1:end-4),'_biascorrected.nii']);
+copyfile([out_path,'/m',in_file],[out_path,in_file(1:end-4),'_biascorrected.nii']);
 delete([out_path,'/m',in_file]);
 % Bias field file
-copyfile([out_path,'/BiasField_',in_file],[out_path,'/',in_file(1:end-4),'_biasfield.nii']);
+copyfile([out_path,'/BiasField_',in_file],[out_path,in_file(1:end-4),'_biasfield.nii']);
 delete([out_path,'/BiasField_',in_file]);
 % mat file
-delete([out_path,'/',in_file(1:end-4),'_seg8.mat']);
+delete([out_path,in_file(1:end-4),'_seg8.mat']);
 % Rename C1
-copyfile([out_path,'/c1',in_file],[out_path,'/',in_file(1:end-4),'_class1.nii']);
+copyfile([out_path,'/c1',in_file],[out_path,in_file(1:end-4),'_class1.nii']);
 delete([out_path,'/c1',in_file]);
 % Rename C2
-copyfile([out_path,'/c2',in_file],[out_path,'/',in_file(1:end-4),'_class2.nii']);
+copyfile([out_path,'/c2',in_file],[out_path,in_file(1:end-4),'_class2.nii']);
 delete([out_path,'/c2',in_file]);
 % Rename C3
-copyfile([out_path,'/c3',in_file],[out_path,'/',in_file(1:end-4),'_class3.nii']);
+copyfile([out_path,'/c3',in_file],[out_path,in_file(1:end-4),'_class3.nii']);
 delete([out_path,'/c3',in_file]);
 %% Combine masks
 clear matlabbatch;
 matlabbatch{1}.spm.util.imcalc.input = {
-    [out_path,'/',in_file(1:end-4),'_class1.nii']
-    [out_path,'/',in_file(1:end-4),'_class2.nii']
-    [out_path,'/',in_file(1:end-4),'_class3.nii']
+    [out_path,in_file(1:end-4),'_class1.nii']
+    [out_path,in_file(1:end-4),'_class2.nii']
+    [out_path,in_file(1:end-4),'_class3.nii']
     };
-matlabbatch{1}.spm.util.imcalc.output = [out_path,'/',in_file(1:end-4),'_brainmask.nii'];
+matlabbatch{1}.spm.util.imcalc.output = [out_path,in_file(1:end-4),'_brainmask.nii'];
 matlabbatch{1}.spm.util.imcalc.outdir = {''};
 matlabbatch{1}.spm.util.imcalc.expression = '(i1+i2+i3)>0.3'; % more liberal than typically required
 matlabbatch{1}.spm.util.imcalc.var = struct('name', {}, 'value', {});
@@ -154,9 +155,9 @@ spm_jobman('run', matlabbatch);
 %% Output WM Mask
 clear matlabbatch;
 matlabbatch{1}.spm.util.imcalc.input = {
-    [out_path,'/',in_file(1:end-4),'_class2.nii']
+    [out_path,in_file(1:end-4),'_class2.nii']
     };
-matlabbatch{1}.spm.util.imcalc.output = [out_path,'/',in_file(1:end-4),'_WMmask.nii'];
+matlabbatch{1}.spm.util.imcalc.output = [out_path,in_file(1:end-4),'_WMmask.nii'];
 matlabbatch{1}.spm.util.imcalc.outdir = {''};
 matlabbatch{1}.spm.util.imcalc.expression = '(i1)>0.5';
 matlabbatch{1}.spm.util.imcalc.var = struct('name', {}, 'value', {});

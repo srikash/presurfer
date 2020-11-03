@@ -33,7 +33,7 @@ else
 end
 
 % make outpath directory
-out_path=[in_path,'/','ps_biascorrected'];
+out_path=[in_path,'ps_biascorrected/'];
 mkdir(out_path);
 disp(' ');
 disp('++++ Output Directory Created.');
@@ -45,7 +45,7 @@ if exist('in_file','var')==1
     disp('++++ Input File Selected.');
     disp(['> ',in_file]);
 else
-    in_file=uigetfile([pwd,'/','*.nii'],'Select Input File');
+    in_file=uigetfile([pwd,'*.nii'],'Select Input File');
     disp(' ');
     disp('++++ Input File Selected.');
     disp(['> ',in_file]);
@@ -57,21 +57,21 @@ end
 if in_file_ext == ".gz"
     disp(' ');
     disp('++++ Unzipping Input file');
-    gunzip([in_path,'/',in_file]);
-    disp(['> ',in_path,'/',in_file(1:end-3)]);
-    delete([in_path,'/',in_file]);
+    gunzip([in_path,in_file]);
+    disp(['> ',in_path,in_file(1:end-3)]);
+    delete([in_path,in_file]);
 end
 
 
 %% Prepare for Bias-correction
-copyfile([in_path,'/',in_file],...
-    [out_path,'/',in_file]);
+copyfile([in_path,in_file],...
+    [out_path,in_file]);
 
 
 %% Setup SPM Batch
 clear matlabbatch;
 
-matlabbatch{1}.spm.spatial.preproc.channel.vols = {[out_path,'/',in_file,',1']};
+matlabbatch{1}.spm.spatial.preproc.channel.vols = {[out_path,in_file,',1']};
 matlabbatch{1}.spm.spatial.preproc.channel.biasreg = 0.001;
 matlabbatch{1}.spm.spatial.preproc.channel.biasfwhm = 30;
 matlabbatch{1}.spm.spatial.preproc.channel.write = [1 1];
@@ -117,13 +117,13 @@ spm_jobman('run', matlabbatch);
 
 %% Rename output file
 % Bias corrected file
-copyfile([out_path,'/m',in_file],[out_path,'/',in_file(1:end-4),'_biascorrected.nii']);
+copyfile([out_path,'/m',in_file],[out_path,in_file(1:end-4),'_biascorrected.nii']);
 delete([out_path,'/m',in_file]);
 % Bias field file
-copyfile([out_path,'/BiasField_',in_file],[out_path,'/',in_file(1:end-4),'_biasfield.nii']);
+copyfile([out_path,'/BiasField_',in_file],[out_path,in_file(1:end-4),'_biasfield.nii']);
 delete([out_path,'/BiasField_',in_file]);
 % mat file
-delete([out_path,'/',in_file(1:end-4),'_seg8.mat']);
+delete([out_path,in_file(1:end-4),'_seg8.mat']);
 
 %% Fin
 disp(' ');
