@@ -1,5 +1,6 @@
 %% MP2RAGE pre-processing Start-to-finish
-
+INV2 = '/path/to/INV2.nii';
+UNI = '/path/to/UNI.nii';
 % ########################################################################
 % STEP - 0 : (optional) MP2RAGEise UNI
 % ########################################################################
@@ -13,6 +14,8 @@ presurf_INV2(INV2); % Outputs presurf_INV2 directory
 % ########################################################################
 % STEP - 3 : Pre-process UNI to get BRAINMASK
 % ########################################################################
+% Change UNI path to that of the MPRAGEised UNI if Step-0 was done
+UNI = '/path/to/UNI.nii';
 presurf_UNI(UNI); % Outputs presurf_UNI directory
 
 % ########################################################################
