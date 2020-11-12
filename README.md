@@ -1,2 +1,3 @@
-# Presurfer
-Scripts to prepare MP2RAGE for Freesurfer using SPM12
+# presurfer - prepare MP2RAGE data for Freesurfer
+### powered by the awesomeness of SPM12 
+
