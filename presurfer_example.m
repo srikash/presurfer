@@ -1,10 +1,10 @@
 %% MP2RAGE pre-processing Start-to-finish
-INV2 = '/path/to/INV2.nii';
-UNI = '/path/to/UNI.nii';
+UNI=fullfile(pwd,'sub-42_mp2rage_0p7mm_iso_p3_UNI_Images.nii.gz');
+INV2=fullfile(pwd,'sub-42_mp2rage_0p7mm_iso_p3_INV2.nii.gz');
 % ########################################################################
 % STEP - 0 : (optional) MP2RAGEise UNI
 % ########################################################################
-presurf_mprageise(INV2,UNI); % Outputs presurf_MPRAGEise directory
+presurf_MPRAGEise(INV2,UNI); % Outputs presurf_MPRAGEise directory
 
 % ########################################################################
 % STEP - 1 : Pre-process INV2 to get STRIPMASK
