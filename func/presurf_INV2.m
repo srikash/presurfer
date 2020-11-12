@@ -108,7 +108,7 @@ spm_jobman('run', matlabbatch);
 %% Clean up output files
 % Remove mat file
 delete(fullfile(full_path_to_out,[in_file_prefix,'_seg8.mat']));
-save(fullfile(full_path_to_out,[in_file_prefix,'_presurfSegBatch.mat']),matlabbatch);
+save(fullfile(full_path_to_out,[in_file_prefix,'_presurfSegBatch.mat']),'matlabbatch');
 
 % Bias corrected file
 copyfile(fullfile(full_path_to_out,['m',in_file_name]), fullfile(full_path_to_out,[in_file_prefix,'_biascorrected.nii']));
@@ -152,7 +152,7 @@ disp(' ');
 disp('++++ Preparing Stripmask');
 spm('defaults', 'FMRI');
 spm_jobman('run', matlabbatch);
-save(fullfile(full_path_to_out,[in_file_prefix,'_presurfStripBatch.mat']),matlabbatch);
+save(fullfile(full_path_to_out,[in_file_prefix,'_presurfStripBatch.mat']),'matlabbatch');
 %% Fin
 disp(' ');
 disp('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');

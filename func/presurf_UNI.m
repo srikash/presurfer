@@ -108,7 +108,7 @@ spm_jobman('run', matlabbatch);
 %% Rename output file
 % Remove mat file
 delete(fullfile(full_path_to_out,[in_file_prefix,'_seg8.mat']));
-save(fullfile(full_path_to_out,[in_file_prefix,'_presurfSegBatch.mat']),matlabbatch);
+save(fullfile(full_path_to_out,[in_file_prefix,'_presurfSegBatch.mat']),'matlabbatch');
 
 
 % Bias corrected file

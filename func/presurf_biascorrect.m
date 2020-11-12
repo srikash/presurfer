@@ -105,7 +105,7 @@ disp(' ');
 disp('++++ Starting Bias-correction');
 spm('defaults', 'FMRI');
 spm_jobman('run', matlabbatch);
-save(fullfile(full_path_to_out,[in_file_prefix,'_presurfBiasCorrBatch.mat']),matlabbatch);
+save(fullfile(full_path_to_out,[in_file_prefix,'_presurfBiasCorrBatch.mat']),'matlabbatch');
 
 %% Rename output file
 % Remove mat file

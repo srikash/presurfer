@@ -2,7 +2,7 @@
 UNI=fullfile(pwd,'sub-42_mp2rage_0p7mm_iso_p3_UNI_Images.nii.gz');
 INV2=fullfile(pwd,'sub-42_mp2rage_0p7mm_iso_p3_INV2.nii.gz');
 % ########################################################################
-% STEP - 0 : (optional) MP2RAGEise UNI
+% STEP - 0 : (optional) MPRAGEise UNI
 % ########################################################################
 presurf_MPRAGEise(INV2,UNI); % Outputs presurf_MPRAGEise directory
 

@@ -99,9 +99,11 @@ inv2_img_norm = mat2gray(inv2_img);
 
 uni_img_clean = uni_img.*inv2_img_norm;
 
-uni_nii.fname=fullfile(uni_file_path,[uni_file_prefix,'_clean.nii']);
+uni_nii.fname=fullfile(full_path_to_out,[uni_file_prefix,'_MPRAGEised.nii']);
 spm_write_vol(uni_nii,uni_img_clean);
 
+% Clean Up
+rmdir(fullfile(inv2_file_path,'presurf_biascorrect'),'s');
 %% Fin
 disp(' ');
 disp('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
