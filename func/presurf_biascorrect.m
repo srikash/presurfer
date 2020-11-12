@@ -51,6 +51,7 @@ if in_file_ext == ".gz"
     disp(['> ', full_path_to_file]);
 else
 	disp('++++ Input file is unzipped');
+	in_file_name=[in_file_prefix,'.nii'];
     disp(['> ', full_path_to_file]);
 end
 

@@ -66,6 +66,7 @@ if uni_file_ext == ".gz"
     disp(['> ', full_path_to_uni]);
 else
 	disp('++++ Input UNI is unzipped');
+	uni_file_name=uni_file_prefix;
     disp(['> ', full_path_to_uni]);
 end
 
@@ -82,6 +83,7 @@ if inv2_file_ext == ".gz"
     disp(['> ', full_path_to_inv2]);
 else
 	disp('++++ Input INV2 is unzipped');
+    inv2_file_name=inv2_file_prefix;
     disp(['> ', full_path_to_inv2]);
 end
 %% Bias-correct INV2
