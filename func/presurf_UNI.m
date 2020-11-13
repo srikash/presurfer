@@ -149,7 +149,7 @@ disp(' ');
 disp('++++ Preparing Brainmask');
 spm('defaults', 'FMRI');
 spm_jobman('run', matlabbatch);
-save(fullfile(full_path_to_out,[in_file_prefix,'_presurfStripBatch.mat']),matlabbatch);
+save(fullfile(full_path_to_out,[in_file_prefix,'_presurfStripBatch.mat']),'matlabbatch');
 %% Output WM Mask
 clear matlabbatch;
 matlabbatch{1}.spm.util.imcalc.input = {
@@ -168,7 +168,7 @@ disp(' ');
 disp('++++ Preparing WMmask');
 spm('defaults', 'FMRI');
 spm_jobman('run', matlabbatch);
-save(fullfile(full_path_to_out,[in_file_prefix,'_presurfWMBatch.mat']),matlabbatch);
+save(fullfile(full_path_to_out,[in_file_prefix,'_presurfWMBatch.mat']),'matlabbatch');
 
 %% Fin
 disp(' ');
