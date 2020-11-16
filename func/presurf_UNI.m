@@ -45,7 +45,7 @@ if in_file_ext == ".gz"
     disp(['> ', full_path_to_file]);
     gunzip(full_path_to_file);
     delete(full_path_to_file);
-    in_file_name=[in_file_prefix,'.nii'];
+    in_file_name=in_file_prefix;
     disp('++++ Unzipped Input file');
     full_path_to_file=fullfile(in_file_path,in_file_name);
     disp(['> ', full_path_to_file]);
