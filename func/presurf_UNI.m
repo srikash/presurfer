@@ -45,9 +45,10 @@ if in_file_ext == ".gz"
     disp(['> ', full_path_to_file]);
     gunzip(full_path_to_file);
     delete(full_path_to_file);
-    in_file_name=[in_file_prefix,'.nii'];
+    in_file_name=in_file_prefix;
     disp('++++ Unzipped Input file');
     full_path_to_file=fullfile(in_file_path,in_file_name);
+    [~, in_file_prefix, ~] = fileparts(full_path_to_file);
     disp(['> ', full_path_to_file]);
 else
     disp('++++ Input file is unzipped');
@@ -110,7 +111,6 @@ spm_jobman('run', matlabbatch);
 delete(fullfile(full_path_to_out,[in_file_prefix,'_seg8.mat']));
 save(fullfile(full_path_to_out,[in_file_prefix,'_presurfSegBatch.mat']),'matlabbatch');
 
-
 % Bias corrected file
 copyfile(fullfile(full_path_to_out,['m',in_file_name]), fullfile(full_path_to_out,[in_file_prefix,'_biascorrected.nii']));
 delete(fullfile(full_path_to_out,['m',in_file_name]));
@@ -155,7 +155,7 @@ clear matlabbatch;
 matlabbatch{1}.spm.util.imcalc.input = {
     fullfile(full_path_to_out,[in_file_prefix,'_class2.nii'])
     };
-matlabbatch{1}.spm.util.imcalc.output = [out_path,in_file(1:end-4),'_WMmask.nii'];
+matlabbatch{1}.spm.util.imcalc.output = fullfile(full_path_to_out,[in_file_prefix,'_WMmask.nii']);
 matlabbatch{1}.spm.util.imcalc.outdir = {''};
 matlabbatch{1}.spm.util.imcalc.expression = '(i1)>0.5';
 matlabbatch{1}.spm.util.imcalc.var = struct('name', {}, 'value', {});
