@@ -1,4 +1,4 @@
-function presurf_MPRAGEise(full_path_to_inv2,full_path_to_uni)
+function full_path_to_output = presurf_MPRAGEise(full_path_to_inv2,full_path_to_uni)
 disp(' ');
 disp('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 disp([datestr(datetime('now')), '        Start MPRAGEising']);
@@ -101,6 +101,8 @@ uni_img_clean = uni_img.*inv2_img_norm;
 
 uni_nii.fname=fullfile(full_path_to_out,[uni_file_prefix,'_MPRAGEised.nii']);
 spm_write_vol(uni_nii,uni_img_clean);
+
+full_path_to_output = uni_nii.fname;
 
 % Clean Up
 rmdir(fullfile(inv2_file_path,'presurf_biascorrect'),'s');

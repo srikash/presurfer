@@ -1,10 +1,10 @@
 %% MP2RAGE pre-processing Start-to-finish
-UNI=fullfile(pwd,'sub-42_mp2rage_0p7mm_iso_p3_UNI_Images.nii.gz');
-INV2=fullfile(pwd,'sub-42_mp2rage_0p7mm_iso_p3_INV2.nii.gz');
+UNI=fullfile(pwd,'sub-01_acq-MP2RAGE_mod-UNI_defaced.nii');
+INV2=fullfile(pwd,'sub-01_acq-MP2RAGE_mod-INV2_defaced.nii');
 % ########################################################################
 % STEP - 0 : (optional) MPRAGEise UNI
 % ########################################################################
-presurf_MPRAGEise(INV2,UNI); % Outputs presurf_MPRAGEise directory
+UNI_out = presurf_MPRAGEise(INV2,UNI); % Outputs presurf_MPRAGEise directory
 
 % ########################################################################
 % STEP - 1 : Pre-process INV2 to get STRIPMASK
@@ -15,8 +15,11 @@ presurf_INV2(INV2); % Outputs presurf_INV2 directory
 % STEP - 3 : Pre-process UNI to get BRAINMASK
 % ########################################################################
 % Change UNI path to that of the MPRAGEised UNI if Step-0 was done
-UNI = '/path/to/UNI.nii';
-presurf_UNI(UNI); % Outputs presurf_UNI directory
+if exist('UNI_out','var')
+    presurf_UNI(UNI_out); % Outputs presurf_UNI directory
+else
+    presurf_UNI(UNI);
+end
 
 % ########################################################################
 % STEP - 4 : Prepare for Freesurfer
