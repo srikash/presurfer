@@ -5,6 +5,8 @@
 Run `presurf_MPRAGEise` <br>
 
 <img src="https://github.com/srikash/TheBeesKnees/blob/main/imgs/presurfer_step0.gif" width="400">
+
+[MPRAGEising is better than background removal ('denoising')](https://github.com/srikash/3dMPRAGEise)
 <br>
 
 Optional: \
