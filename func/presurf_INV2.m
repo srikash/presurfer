@@ -1,5 +1,6 @@
 function presurf_INV2(full_path_to_file)
-spm_directory="/opt/spm12"
+spm_directory="/opt/spm12";
+addpath(spm_directory);
 disp(' ');
 disp('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 disp([datestr(datetime('now')), '        Start Pre-processing INV2']);
