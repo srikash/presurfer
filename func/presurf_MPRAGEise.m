@@ -1,4 +1,6 @@
 function full_path_to_output = presurf_MPRAGEise(full_path_to_inv2,full_path_to_uni)
+spm_directory="/opt/spm12";
+addpath(spm_directory);
 disp(' ');
 disp('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 disp([datestr(datetime('now')), '        Start MPRAGEising']);
