@@ -1,6 +1,8 @@
 function presurf_INV2(full_path_to_file)
-spm_directory="/opt/spm12";
+spm_directory="/opt/spm12-r7771";
 addpath(spm_directory);
+presurf_directory="/opt/spm12-r7771/toolbox/presurfer";
+addpath(presurf_directory);
 disp(' ');
 disp('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 disp([datestr(datetime('now')), '        Start Pre-processing INV2']);
