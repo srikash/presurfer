@@ -1,5 +1,5 @@
 function presurf_biascorrect(full_path_to_file)
-spm_directory="/opt/spm12";
+spm_directory="/opt/spm12/spm12_mcr/spm/spm12";
 addpath(spm_directory);
 disp(' ');
 disp('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');

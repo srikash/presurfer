@@ -1,3 +1,9 @@
+%% Setup Paths
+spm_directory="/opt/spm12/spm12_mcr/spm/spm12";
+addpath(spm_directory);
+presurfer_directory=[spm_directory,"/toolbox/presurfer"];
+addpath(genpath(presurfer_directory));
+
 %% MP2RAGE pre-processing Start-to-finish
 UNI=fullfile(pwd,'sub-01_acq-MP2RAGE_mod-UNI_defaced.nii');
 INV2=fullfile(pwd,'sub-01_acq-MP2RAGE_mod-INV2_defaced.nii');

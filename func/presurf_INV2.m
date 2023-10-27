@@ -1,5 +1,5 @@
 function presurf_INV2(full_path_to_file)
-spm_directory="/opt/spm12r7771";
+spm_directory="/opt/spm12/spm12_mcr/spm/spm12";
 addpath(spm_directory);
 presurf_directory="/opt/spm12r7771/toolbox/presurfer";
 addpath(presurf_directory);
