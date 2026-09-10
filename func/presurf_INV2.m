@@ -1,4 +1,4 @@
-function presurf_INV2(full_path_to_file)
+function [full_path_to_out, biascorr]=presurf_INV2(full_path_to_file)
 disp(' ');
 disp('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 disp([datestr(datetime('now')), '        Start Pre-processing INV2']);
@@ -113,6 +113,7 @@ save(fullfile(full_path_to_out,[in_file_prefix,'_presurfSegBatch.mat']),'matlabb
 
 % Bias corrected file
 copyfile(fullfile(full_path_to_out,['m',in_file_name]), fullfile(full_path_to_out,[in_file_prefix,'_biascorrected.nii']));
+biascorr=fullfile(full_path_to_out,[in_file_prefix,'_biascorrected.nii']);
 delete(fullfile(full_path_to_out,['m',in_file_name]));
 
 % Bias field file
